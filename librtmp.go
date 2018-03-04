@@ -39,8 +39,7 @@ func (r *RTMP) SetupURL(url string) error {
 }
 
 func (r *RTMP) EnableWrite() error {
-	_, err := C.RTMP_EnableWrite()
-	return err
+	C.RTMP_EnableWrite(r.rtmp)
 }
 
 func (r *RTMP) IsConnected() bool {
@@ -67,6 +66,11 @@ func (r *RTMP) LogSetLevel(loglevel int) {
 
 func (r *RTMP) Read(p []byte) (n int, err error) {
 	size, err := C.RTMP_Read(r.rtmp, (*C.char)(unsafe.Pointer(&p[0])), C.int(len(p)))
+	return int(size), nil
+}
+
+func (r *RTMP) Write(p []byte) (n int, err error) {
+	size, err := C.RTMP_Write(r.rtmp, (*C.char)(unsafe.Pointer(&p[0])), C.int(len(p)))
 	return int(size), nil
 }
 
