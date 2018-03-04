@@ -38,6 +38,11 @@ func (r *RTMP) SetupURL(url string) error {
 	return err
 }
 
+func (r *RTMP) EnableWrite() error {
+	_, err := C.RTMP_EnableWrite()
+	return err
+}
+
 func (r *RTMP) IsConnected() bool {
 	ret := C.RTMP_IsConnected(r.rtmp)
 	return (ret != 0)
