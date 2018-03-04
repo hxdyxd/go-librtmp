@@ -60,6 +60,14 @@ func (r *RTMP) Connect() error {
 	return nil
 }
 
+func (r *RTMP) ConnectStream(seekTime int) error {
+	ret, err := C.RTMP_ConnectStream(r.rtmp, C.int(seekTime))
+	if ret != 0 {
+		return err
+	}
+	return nil
+}
+
 func (r *RTMP) LogSetLevel(loglevel int) {
 	C.RTMP_LogSetLevel(C.RTMP_LogLevel(loglevel))
 }
