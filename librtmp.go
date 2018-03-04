@@ -38,7 +38,7 @@ func (r *RTMP) SetupURL(url string) error {
 	return err
 }
 
-func (r *RTMP) EnableWrite() error {
+func (r *RTMP) EnableWrite() {
 	C.RTMP_EnableWrite(r.rtmp)
 }
 
